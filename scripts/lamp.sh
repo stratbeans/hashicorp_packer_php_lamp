@@ -30,25 +30,28 @@ sudo apt-get install php \
 	libapache2-mod-php \
 	php-mysql -y
 
+export PHP_VERSION=`php -r "echo substr(phpversion(),0,3);"`
+
 # Setup FPM (Optional)
 echo "================================="
 echo "OPTIONAL - FPM"
 echo "================================="
 sudo apt install php-fpm -y
-sudo a2enmod proxy_fcgi setenvif -y
-sudo a2enconf php-fpm -y
-sudo a2dismod php -y
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php-fpm 
+sudo a2dismod php
 sudo service apache2 restart -y
 
 # Apache Tuning (Optional)
 echo "================================="
 echo "OPTIONAL - Apache Tuning ENABLE DISABLE modules and fpm"
 echo "================================="
-sudo service php-fpm restart -y
+export PHP_FPM=php${PHP_VERSION}-fpm
+sudo service $PHP_FPM restart -y
 sudo a2dismod mpm_prefork -y
 sudo a2enmod mpm_event -y
 sudo service apache2 restart -y
-sudo service php-fpm restart -y
+sudo service $PHP_FPM restart -y
 
 # Setup PHPMyAdmin
 echo "================================="
@@ -57,21 +60,24 @@ echo "================================="
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/internal/skip-preseed boolean true"
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect"
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/dbconfig-install boolean false"
-sudo apt install phpmyadmin php-mbstring php-gettext -y
+sudo apt install phpmyadmin \
+	php-mbstring \
+	php-gettext -y
 sudo a2enmod ssl -y
 sudo service apache2 restart -y
-sudo service php-fpm restart -y
+sudo service $PHP_FPM restart -y
 
 # MEM CACHED (Optional)
 echo "================================="
 echo "Setup Memcached"
 echo "================================="
-sudo apt-get install memcached php-memcached -y
+sudo apt-get install memcached \
+	php-memcached -y
 
 
 # Generally useful PHP Library 
 echo "================================="
-echo "Setup CURL"
+echo "Setup Useful PHP libs"
 echo "================================="
 sudo apt-get install php-curl \
 	php-common \
