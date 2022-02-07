@@ -27,8 +27,13 @@
 		"destination": "/home/ubuntu/"
 	},
 	{
+		"type": "file",
+		"source": "pages/index.php",
+		"destination": "/home/ubuntu/"
+	},
+	{
 		"type" : "shell",
-		"script" : "scripts/lamp.sh"
+		"script" : "scripts/lamp-ubuntu.sh"
 	}
   ]
 }
