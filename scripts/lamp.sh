@@ -48,8 +48,8 @@ echo "OPTIONAL - Apache Tuning ENABLE DISABLE modules and fpm"
 echo "================================="
 export PHP_FPM=php${PHP_VERSION}-fpm
 sudo service $PHP_FPM restart -y
-sudo a2dismod mpm_prefork -y
-sudo a2enmod mpm_event -y
+sudo a2dismod mpm_prefork
+sudo a2enmod mpm_event 
 sudo service apache2 restart -y
 sudo service $PHP_FPM restart -y
 
@@ -63,7 +63,9 @@ sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/dbconfig-install boolean 
 sudo apt install phpmyadmin \
 	php-mbstring \
 	php-gettext -y
-sudo a2enmod ssl -y
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+sudo a2enmod ssl
+sudo a2enmod mbstring 
 sudo service apache2 restart -y
 sudo service $PHP_FPM restart -y
 
