@@ -2,8 +2,8 @@
   "variables": {
     "ami_id": "ami-0e472ba40eb589f49",
     "app_name": "ubuntu18.04-lamp",
-    "access_key" : "AKIA2X2AT2ZXJL72W2YM",
-    "secret_key" : "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",
+    "access_key" : "AKIAWZHTONJSWI6HEW4J",
+    "secret_key" : "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",
     "instance_type" : "t2.micro",
     "my_user_name" : "ubuntu",
     "my_ami_name" : "my-ubuntu18.04-lamp-ami"

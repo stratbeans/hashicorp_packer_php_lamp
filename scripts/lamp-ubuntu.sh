@@ -68,7 +68,7 @@ sudo apt install phpmyadmin \
 	php-gettext -y
 sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 sudo a2enmod ssl
-sudo a2enmod mbstring 
+sudo phpennmod mbstring 
 sudo service apache2 restart -y
 sudo service $PHP_FPM restart -y
 
@@ -91,6 +91,6 @@ sudo apt-get install php-curl \
 	php-bcmath -y
 
 sudo service apache2 restart -y
-sudo service php-fpm restart -y
+sudo service $PHP_FPM restart -y
 
 echo "~~~~~~~ ALL DONE ~~~~~~~~"
