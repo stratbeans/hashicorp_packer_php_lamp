@@ -1,0 +1,34 @@
+{
+  "variables": {
+    "ami_id": "ami-0e472ba40eb589f49",
+    "app_name": "ubuntu18.04-lamp",
+    "access_key" : "AKIA2X2AT2ZXJL72W2YM",
+    "secret_key" : "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",
+    "instance_type" : "t2.micro",
+    "my_user_name" : "ubuntu",
+    "my_ami_name" : "my-ubuntu18.04-lamp-ami"
+  },
+
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "us-east-1",
+    "source_ami": "{{user `ami_id`}}",
+    "access_key" : "{{user `access_key` }}",
+    "secret_key" : "{{user `secret_key` }}",
+    "instance_type": "{{user `instance_type` }}",
+    "ssh_username": "{{user `my_user_name` }}",
+    "ami_name": "{{user `my_ami_name` }}"
+  }],
+
+  "provisioners" : [
+	{
+		"type": "file",
+		"source": "sql/mysql_create_user.sql",
+		"destination": "/home/ubuntu/"
+	},
+	{
+		"type" : "shell",
+		"script" : "scripts/lamp.sh"
+	}
+  ]
+}
