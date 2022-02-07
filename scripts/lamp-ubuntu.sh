@@ -35,6 +35,17 @@ export PHP_VERSION=`php -r "echo substr(phpversion(),0,3);"`
 # Put phpinfo page into root director to see proof of life of php !
 sudo mv index.php /var/www/html/
 
+# Generally useful PHP Library 
+echo "================================="
+echo "Setup Useful PHP libs"
+echo "================================="
+sudo apt-get install php-curl \
+	php-common \
+	php-mbstring \
+	php-json \
+	php-xml \
+	php-bcmath -y
+
 # Setup FPM (Optional)
 echo "================================="
 echo "OPTIONAL - FPM"
@@ -78,17 +89,6 @@ echo "Setup Memcached"
 echo "================================="
 sudo apt-get install memcached \
 	php-memcached -y
-
-# Generally useful PHP Library 
-echo "================================="
-echo "Setup Useful PHP libs"
-echo "================================="
-sudo apt-get install php-curl \
-	php-common \
-	php-mbstring \
-	php-json \
-	php-xml \
-	php-bcmath -y
 
 sudo service apache2 restart -y
 sudo service $PHP_FPM restart -y
